@@ -1,0 +1,17 @@
+{
+  "name": "ts-fraction",
+  "version": "1.0.0",
+  "description": "Fraction library written in TypeScript",
+  "main": "src/fraction.ts",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Noah Scardina",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^29.5.2",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.1.0",
+    "typescript": "^5.1.3"
+  }
+}
