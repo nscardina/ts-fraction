@@ -49,7 +49,6 @@ class Fraction {
 
         const digitsRightOfPoint = str.substring(decimalPointIndex + 1)
         const numDigitsRightOfPoint = BigInt(digitsRightOfPoint.length)
-        console.log(numDigitsRightOfPoint)
 
         return new Fraction(BigInt(str.replace('.', '')), BigInt((10n ** (numDigitsRightOfPoint))))
     }
