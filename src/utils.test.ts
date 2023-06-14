@@ -1,4 +1,46 @@
-import { canBeConvertedToBigInt, canBeConvertedToFraction } from "./utils";
+import { DECIMAL_STRING_REGEX, canBeConvertedToBigInt, canBeConvertedToFraction } from "./utils";
+
+describe('DECIMAL_STRING_REGEX tests', () => {
+    test('Regex matches integer 3', () => {
+        expect(DECIMAL_STRING_REGEX.test('3')).toBe(true)
+    })
+
+    test('Regex matches integer +3', () => {
+        expect(DECIMAL_STRING_REGEX.test('+3')).toBe(true)
+    })
+
+    test('Regex matches integer -3', () => {
+        expect(DECIMAL_STRING_REGEX.test('-3')).toBe(true)
+    })
+
+    test('Regex does not match minus sign', () => {
+        expect(DECIMAL_STRING_REGEX.test('-')).toBe(false)
+    })
+
+    test('Regex does not match plus sign', () => {
+        expect(DECIMAL_STRING_REGEX.test('+')).toBe(false)
+    })
+
+    test('Regex matches decimal 3.5', () => {
+        expect(DECIMAL_STRING_REGEX.test('3.5')).toBe(true)
+    })
+
+    test('Regex matches decimal +3.5', () => {
+        expect(DECIMAL_STRING_REGEX.test('3.5')).toBe(true)
+    })
+
+    test('Regex matches decimal -3.5', () => {
+        expect(DECIMAL_STRING_REGEX.test('3.5')).toBe(true)
+    })
+
+    test('Regex matches decimal .5', () => {
+        expect(DECIMAL_STRING_REGEX.test('.5')).toBe(true)
+    })
+
+    test('Regex does not match decimal 3.', () => {
+        expect(DECIMAL_STRING_REGEX.test('3.')).toBe(false)
+    })
+})
 
 describe('canBeConvertedToBigInt() tests', () => {
     test('Convert positive integer string to BigInt', () => {

@@ -13,7 +13,15 @@ const INTEGER_STRING_REGEX: RegExp = /^[-\+]?\d+$/
  * - zero or more digits (`0`-`9`), possibly followed by 
  * - one `U+002E . FULL STOP` character and one or more digits (`0`-`9`).
  */
-const DECIMAL_STRING_REGEX: RegExp = /^[-\+]?\d*(.\d+)?$/
+// export const DECIMAL_STRING_REGEX: RegExp = /^[-\+]?\d*(.\d+)?$/
+export const DECIMAL_STRING_REGEX: RegExp = 
+/^[-\+]?((\d*)(?=(\.\d+))|(\d+)(?!(\.\d+)))((\.\d+)(?<!([-\+]?\d+))|((\.\d+)?)(?<=([-\+]?\d+)))$/
+
+export const DECIMAL_STRING_REGEX_BEGINNING = 
+/^[-\+]?((\d*)(?=(\.\d+))|(\d+)(?!(\.\d+)))((\.\d+)(?<!([-\+]?\d+))|((\.\d+)?)(?<=([-\+]?\d+)))/
+
+export const DECIMAL_STRING_REGEX_NO_BEGINNING_OR_END = 
+/.*[-\+]?((\d*)(?=(\.\d+))|(\d+)(?!(\.\d+)))((\.\d+)(?<!([-\+]?\d+))|((\.\d+)?)(?<=([-\+]?\d+))).*/
 
 /**
  * Determines whether a particular string `str` can be converted to a `bigint`. That is, this method 

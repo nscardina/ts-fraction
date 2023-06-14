@@ -4,6 +4,7 @@
         "module": "ES2020",
         "sourceMap": true,
         "outDir": "out",
-        "moduleResolution": "nodenext"
+        "moduleResolution": "nodenext",
+        "strictNullChecks": true
     }
 }

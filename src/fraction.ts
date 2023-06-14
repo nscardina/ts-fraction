@@ -1,5 +1,6 @@
 "use strict";
 
+import { parseExpression } from "./expression/expression";
 import gcd from "./gcd";
 import { canBeConvertedToBigInt, canBeConvertedToFraction, isDecimalString } from "./utils";
 
@@ -112,6 +113,8 @@ class Fraction {
             }"${!paramBCorrect ? `, "${(b as any)}"` : ''
             }: Must be of type "number (integral) | bigint | string, or one Fraction parameter"`)
         }
+
+        this.simplify()
     }
 
     /**
@@ -150,7 +153,7 @@ class Fraction {
             let newNumerator = this.numerator * b + a * this.denominator
             let newDenominator = this.denominator * b
             let commonFactor = gcd(newNumerator, newDenominator)
-            return new Fraction(newNumerator / commonFactor, newDenominator / commonFactor)
+            return new Fraction(newNumerator / commonFactor, newDenominator / commonFactor).simplify()
         } else {
             const paramACorrect = ((typeof(a) === 'bigint') 
             || (typeof(a) === 'number' && Number.isInteger(a))
@@ -164,6 +167,7 @@ class Fraction {
             }"${!paramBCorrect ? `, "${(b as any)}"` : ''
             }: Must be of type "number | bigint | string, or one Fraction parameter"`)
         }
+        
         
     }
 
@@ -203,7 +207,7 @@ class Fraction {
             let newNumerator = this.numerator * b - a * this.denominator
             let newDenominator = this.denominator * b
             let commonFactor = gcd(newNumerator, newDenominator)
-            return new Fraction(newNumerator / commonFactor, newDenominator / commonFactor)
+            return new Fraction(newNumerator / commonFactor, newDenominator / commonFactor).simplify()
         } else {
             const paramACorrect = ((typeof(a) === 'bigint') 
             || (typeof(a) === 'number' && Number.isInteger(a))
@@ -256,7 +260,7 @@ class Fraction {
             let newNumerator = this.numerator * a 
             let newDenominator = this.denominator * b
             let commonFactor = gcd(newNumerator, newDenominator)
-            return new Fraction(newNumerator / commonFactor, newDenominator / commonFactor)
+            return new Fraction(newNumerator / commonFactor, newDenominator / commonFactor).simplify()
         } else {
             const paramACorrect = ((typeof(a) === 'bigint') 
             || (typeof(a) === 'number' && Number.isInteger(a))
@@ -309,7 +313,7 @@ class Fraction {
             let newNumerator = this.numerator * b 
             let newDenominator = this.denominator * a
             let commonFactor = gcd(newNumerator, newDenominator)
-            return new Fraction(newNumerator / commonFactor, newDenominator / commonFactor)
+            return new Fraction(newNumerator / commonFactor, newDenominator / commonFactor).simplify()
         } else {
             const paramACorrect = ((typeof(a) === 'bigint') 
             || (typeof(a) === 'number' && Number.isInteger(a))
@@ -376,7 +380,15 @@ class Fraction {
         
     }
 
-
+    /**
+     * Simplifies this `Fraction` by dividing by the common factor of the `numerator` and `denominator`.
+     */
+    simplify(): Fraction {
+        const commonFactor = gcd(this.numerator, this.denominator)
+        this.numerator /= commonFactor
+        this.denominator /= commonFactor
+        return this
+    }
 
 }
 

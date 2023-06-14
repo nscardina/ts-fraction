@@ -396,10 +396,10 @@ describe('parseString() method tests', () => {
         expect(frac).toHaveProperty('denominator', 1n)
     })
 
-    test('parseString() being called with decimal string "3.5" yields {numerator: 35n, denominator: 10n}', () => {
+    test('parseString() being called with decimal string "3.5" yields {numerator: 7n, denominator: 2n}', () => {
         const frac = Fraction.parseString('3.5')
-        expect(frac).toHaveProperty('numerator', 35n)
-        expect(frac).toHaveProperty('denominator', 10n)
+        expect(frac).toHaveProperty('numerator', 7n)
+        expect(frac).toHaveProperty('denominator', 2n)
     })
 
 
