@@ -1,4 +1,6 @@
+import { parseExpression } from '.'
 import Fraction from './fraction'
+import './toequalfraction'
 
 describe('Constructor Tests', () => {
     test('no-arguments constructor constructs {numerator: 0n, denominator: 1n}', () => {
@@ -403,4 +405,31 @@ describe('parseString() method tests', () => {
     })
 
 
+})
+
+describe('toDecimal() method tests', () => {
+    test('toDecimal() being called with 0 decimal places on 15/2', () => {
+        const frac = parseExpression('15/2')
+        expect(frac.toDecimal(0n)).toBe('7')
+    })
+
+    test('toDecimal() being called with 1 decimal place on 15/2', () => {
+        const frac = parseExpression('15/2')
+        expect(frac.toDecimal(1n)).toBe('7.5')
+    })
+
+    test('toDecimal() being called with 3 decimal places on 2/3', () => {
+        const frac = parseExpression('2/3')
+        expect(frac.toDecimal(3n)).toBe('0.667')
+    })
+
+    test('toDecimal() being called with 3 decimal places on -2/3', () => {
+        const frac = parseExpression('(0 - 2) / 3')
+        expect(frac.toDecimal(3n)).toBe('-0.667')
+    })
+
+    test('toDecimal() being called with 3 decimal places on 1', () => {
+        const frac = parseExpression('1')
+        expect(frac.toDecimal(3n)).toBe('1')
+    })
 })

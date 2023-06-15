@@ -7,6 +7,9 @@
  */
 function gcd(u: bigint, v: bigint): bigint {
 
+    if (u < 0) u = -u
+    if (v < 0) v = -v
+
     // Must multiply the gcd we find by this at the end.
     let finalCoefficient: bigint = 1n
     let uIsOdd;

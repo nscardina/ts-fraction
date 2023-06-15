@@ -390,6 +390,79 @@ class Fraction {
         return this
     }
 
+    /**
+     * Returns a decimal `string` representation of this `Fraction`, accurate to a certain number of 
+     * decimal places.
+     * @param numDecimalPlaces number of decimal places of accuracy to generate for the fraction's 
+     * decimal representation.
+     * @returns decimal representation of this `Fraction`.
+     */
+    toDecimal(numDecimalPlaces: bigint) {
+
+        let strNumerator = this.numerator.toString()
+        let strDenominator = this.denominator.toString()
+
+        let absNum: bigint = 0n
+        let absDen: bigint = 0n
+
+        const negative = strNumerator.startsWith('-') !== strDenominator.startsWith('-')
+        if (strNumerator.startsWith('-')) {
+            strNumerator = strNumerator.substring(1)
+            absNum = -this.numerator
+        } else {
+            absNum = this.numerator
+        }
+        if (strDenominator.startsWith('-')) {
+            strDenominator = strDenominator.substring(1)
+            absDen = -this.denominator
+        } else {
+            absDen = this.denominator
+        }
+
+        let decimal = ""
+        let dividend: bigint
+        let quotient: bigint = 0n
+        let remainder: bigint = 0n
+
+        // Write out the non-decimal part first
+        for (let i = 0; i < strNumerator.length; i++) {
+            dividend = remainder * 10n + BigInt(strNumerator.substring(i, i + 1))
+            quotient = dividend / absDen
+            remainder = dividend % absDen
+
+            decimal += quotient
+        }
+
+        if (numDecimalPlaces > 0n) {
+            decimal += '.'
+
+            for (let i = 0; i < numDecimalPlaces + 1n; i++) {
+
+                dividend = remainder * 10n
+                quotient = dividend / absDen
+                remainder = dividend % absDen
+    
+                decimal += quotient
+            }
+
+            if (BigInt(decimal.substring(decimal.length - 1, decimal.length)) >= 5n) {
+                decimal = decimal.substring(0, decimal.length - 2) + (BigInt(decimal[decimal.length - 2]) + 1n).toString()
+            } else {
+                decimal = decimal.substring(0, decimal.length - 1)
+            }
+        }
+
+        // return decimal after removing any zeroes in front of the decimal place.
+        decimal = decimal.replace(/^0*(?!\.)/, '')
+        if (/.0+$/.test(decimal)) {
+            decimal = decimal.replace(/.0+$/, '')
+        }
+        if (negative) {
+            decimal = `-${decimal}`
+        }
+        return decimal
+    }
+
 }
 
 export default Fraction

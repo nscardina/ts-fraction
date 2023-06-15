@@ -137,7 +137,7 @@ describe('findFirstMatchingParentheses() function tests', () => {
     test('passing expression "(3 + 5)" returns [0, 4]', () => {
         expect(findFirstMatchingParentheses(parseToTokens('(3 + 5)'))).toEqual([0, 4])
     })
-
+    
     test('passing expression "(3 + (5))" returns [3, 5]', () => {
         expect(findFirstMatchingParentheses(parseToTokens('(3 + (5))'))).toEqual([3, 5])
     })
@@ -192,5 +192,11 @@ describe('parseExpression() function tests', () => {
 
     test('passing expression "3 * (5 + 10) / 3" returns 15/1', () => {
         expect(parseExpression('3 * (5 + 10) / 3')).toEqualFraction(Fraction.parseString('15'))
+    })
+
+    test('passing expression "(0 - 2) / 3" returns -2/3', () => {
+        const e = parseExpression('(0 - 2) / 3')
+        expect(e).toHaveProperty('numerator', -2n)
+        expect(e).toHaveProperty('denominator', 3n)
     })
 })
