@@ -18,6 +18,7 @@ import { canBeConvertedToBigInt, canBeConvertedToFraction, isDecimalString } fro
  * - **subtraction**, using the {@linkcode minus()} method,
  * - **multiplication**, using the {@linkcode times()} method,
  * - **division**, using the {@linkcode div()} method.
+ * - **absolute value**, using the {@linkcode abs()} method.
  * 
  * `Fraction` objects also have the other following methods:
  * - {@linkcode equals()}, for testing for equality with other numbers and fractions
@@ -327,6 +328,23 @@ class Fraction {
             }: Must be of type "number | bigint | string, or one Fraction parameter"`)
         }
         
+    }
+
+    /**
+     * Returns the absolute value of this `Fraction`; that is, if this `Fraction` is negative, this 
+     * `Fraction` times -1 will be returned; otherwise, an unchanged copy of this `Fraction` is 
+     * returned.
+     * @returns absolute value of this `Fraction`.
+     */
+    abs(): Fraction {
+        if (
+            (this.numerator < 0n && this.denominator >= 0n) ||
+            (this.numerator >= 0n && this.denominator < 0n)
+        ) {
+            return new Fraction(-this.numerator, this.denominator)
+        } else {
+            return new Fraction(this)
+        }
     }
 
     /**

@@ -306,6 +306,22 @@ describe('div() Method Tests', () => {
     
 })
 
+describe("abs() Method Tests", () => {
+
+    test('abs() being called on 4/3 returns 4/3', () => {
+        const result = new Fraction(4n, 3n).abs()
+        expect(result).toHaveProperty('numerator', 4n)
+        expect(result).toHaveProperty('denominator', 3n)
+    })
+
+    test('abs() being called on -4/3 returns 4/3', () => {
+        const result = new Fraction(-4n, 3n).abs()
+        expect(result).toHaveProperty('numerator', 4n)
+        expect(result).toHaveProperty('denominator', 3n)
+    })
+
+})
+
 describe('equals() Method Tests', () => {
 
     const frac = new Fraction(1n, 1n)
